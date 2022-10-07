@@ -143,9 +143,37 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
      * ->this means that function does not include side effects.
      * -> Same imput will always give the same out put without side effects.This is known as idempotence.Eg f(x) = x + 2.This will always give out the value of x plus 2.
      * ->Idempotence means property of certain operations can be applied multiple times without changing the result.
-     * 
+     -> Pure functions follow the following 2 properties:
+     *  a)Referential transparency- this means that the fuction always gives the same return value for the same arguments.the function does not depend on any mutable state.
+     *  b)Side effect free- function cannot cause side effect. 
+     * =>SIDE EFFECTS: are when your code interacts(reads/writes to) with external mutable state eg I/O, reassigning a variable, modifying a mutable object.
+     * ->External Mutable state is anything outside the function that would change the data in your program eg set a function,boolean or an object, delete properties on object.
+     * Eg of mutability state being set inside function: 
      */
+        function changeAvailability(){
+          availability = true;
+        }
+        //state of availability is mutated to true boolean
+      //Eg of Pure Functions
+      function multiply(a, b){
+        return a * b;
+      } //For the same input, you get the same output.
 
+      //Eg of Impure Functions
+      let ageLimit = 45;
+      function ageCheck(age){
+        return age <= ageLimit;
+      }/*this is an impure function coz it depends on captured ageLimit variable.
+      ->Captured Variables  dont make a function impure, but mutable ones(re-assignable) do.Eg let keyword can be reassigned.
+      Eg 2 of Impure functions
+      */
+     function multiply(a, b){
+      console.log('Arguments: ', a, b);
+      return a * b; 
+     }
+     /**
+      * Program without impure functions is impossible because we need to interact with external values.General rule is that we use 80% pure functions and 20% impure of the necessity.
+      */
 
 
 /**                     ### HIGHER ORDER FUNCTION ###
