@@ -20,10 +20,10 @@
  * 
  * 
  *                  ###CONCEPTS###
- *  -->Declarative vs Imperative Programming
- *  -->Predictable (Pure & Declarative)
+ *  -->Declarative vs Imperative Programming ✔
+ *  -->Predictable (Pure & Declarative) 
  *  -->Immutability (Safety)
- *  -->Pure vs Impure Functions
+ *  -->Pure vs Impure Functions ✔
  *  -->First Class Functions  (Transparent)
  *  -->Higher Order Functions 
  *  -->Closure
@@ -139,11 +139,12 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
 
 
 
-    /**                 ###PURE FUNCTIONS###
+    /**                 ### PURE & IMPURE FUNCTIONS ###
      * ->this means that function does not include side effects.
      * -> Same imput will always give the same out put without side effects.This is known as idempotence.Eg f(x) = x + 2.This will always give out the value of x plus 2.
      * ->Idempotence means property of certain operations can be applied multiple times without changing the result.
-     -> Pure functions follow the following 2 properties:
+     * ->An Idempotent function is one that when the results are reapplied to that function,the results remain the same without a different result.
+     * -> Pure functions follow the following 2 properties:
      *  a)Referential transparency- this means that the fuction always gives the same return value for the same arguments.the function does not depend on any mutable state.
      *  b)Side effect free- function cannot cause side effect. 
      * =>SIDE EFFECTS: are when your code interacts(reads/writes to) with external mutable state eg I/O, reassigning a variable, modifying a mutable object.
