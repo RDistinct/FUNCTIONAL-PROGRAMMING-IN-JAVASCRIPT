@@ -24,7 +24,7 @@
  *  -->Predictable (Pure & Declarative) 
  *  -->Immutability (Safety)
  *  -->Pure vs Impure Functions ✔
- *  -->First Class Functions  (Transparent)
+ *  -->First Class Functions  (Transparent) ✔
  *  -->Higher Order Functions 
  *  -->Closure
  *  -->Recursion
@@ -184,6 +184,7 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
  * 
  *                      ### FIRST CLASS FUNCTION ###
  * -> Can be used as a variable/value and passed into another function or returned from another function.
+ * -> In short, functions are treated like other variables.A function can be passed as an argument to another function, can be returned by another function, or can be assigned as a value to a variable. 
  * E.g of a First class function
  */
     const myFun = function(event){
@@ -192,3 +193,35 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
     //function is stored in the variable myFun.
     document.getElementById('#myId').addEventListener('click', myFun);
     //myFun is an argument for addEventListener.
+
+      //Assign a function to a variable:
+       const greeting = () =>{
+        console.log('Hello')
+       }
+       greeting(); //OUTPUT: Hello - calling the function using the variable.
+       /**We assigned an anonymous function to a variable greeting & invoke the function by using the variable with brackets - greeting() */
+
+       //Pass a function as an argument
+       function greet(){
+        return 'Hello, ';
+       }
+
+       function salutation(helloMsg, name){
+        console.log(helloMsg() + name);     //here  helloMsg has parenthesis coz we expect a function.In this case, greet function. If we dont use the parenthesis, it wont work.It will show the function syntax of greet.
+       }
+       salutation(greet, "Joe"); //OUTPUT: Hello, joe
+       /**
+        * We pass greet function as an argument to salutation function.
+        * -> A function passed as an argument to another function is called a CallBack function 
+        */ 
+
+       //Return a function
+       function greetings(){
+        return () => {
+          console.log("Hey!");
+        }
+       }
+       /**
+        * This eg we are returning a funtion(console .log ) from another function. Functions are treated as values in JavaScript.
+        * -> A function that returns another function or takes another function as a parameter is called a Higher Order Function
+        */
