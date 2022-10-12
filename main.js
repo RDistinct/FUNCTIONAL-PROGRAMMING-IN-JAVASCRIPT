@@ -226,7 +226,7 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
         * -> A function that returns another function or takes another function as a parameter is called a Higher Order Function
         */
 
-       
+
        /**
         *                   ###HIGHER ORDER FUNCTIONS#### 
         * -> Can take another function as a parameter or return another function(or both).     
@@ -262,4 +262,40 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
  
         const evenNumbers = moreNumbers.filter(number => number % 2 === 0);
         console.log(evenNumbers); //OUTPUT [2,4,6,8,10]
+
+        /**
+        *       ###THE REDUCE METHOD###
+        * ->in functional programming it is the most used method because it reduces things to a single value.
+        * -> takes a user-supplied callback function & executes it on each element of the array in an orderly manner,passing the return value from calculation on the preceeding element.
+        * -> The Reducer is a function that takes the accumulated value and the next item in the array &returns a new value.
+        * -> final result of running the reducer function on all elements is a single value.->Reducer syntax is array.reduce(reducer)   
+        * ->Reduce function syntax is: 
+        *   reduce((previousValue, currentValue)=>{ code })
+        *   reduce((previousValue, currentValue)=>{},initialValue)
+        * -> Eg of reduce to add numbers in array
+        */
+
+         const numbers = [2,3,4]
+         const addNumbers = numbers.reduce((sum, value) => sum + value);
+         
+         console.log(addNumbers); //OUTPUT: 9
+ 
+         //To add one using ilnitial value
+         const numbers = [2,3,4]
+         const addNumbers = numbers.reduce((sum, value) => sum + value, 1);
+         console.log(addNumbers); //OUTPUT: 10
+         //The 1 is an initial value
+         /**
+          * -> initial value is a value to which previousValue is initialized when callback function is called for the first time.
+          * -> If initialValue is specified, also the currentValue is initialized to the first value in the array.
+          * -> If initialValue is not specified, previousValue is initialized to the first value of the array, & currentValue is initialized to the second value in the array.
+          * Eg of reduce function with callbacks:
+          */
+ 
+         const add1 = number => number + 1;
+         const add2 = number => number + 2;
+ 
+         const inputFunction = (input, fn) => fn(input) //takes an input and a function and returns the function with the input given
+ 
+         const reduceValue = [add1, add2].reduce(inputFunction, 1); //OUTPUT 4
  
