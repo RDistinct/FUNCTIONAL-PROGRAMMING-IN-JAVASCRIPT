@@ -225,3 +225,41 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
         * This eg we are returning a funtion(console .log ) from another function. Functions are treated as values in JavaScript.
         * -> A function that returns another function or takes another function as a parameter is called a Higher Order Function
         */
+
+       
+       /**
+        *                   ###HIGHER ORDER FUNCTIONS#### 
+        * -> Can take another function as a parameter or return another function(or both).     
+        * -> Its a function that receives or passes out another function
+        * -> Javascript has in built array methods that support functional programming natively.
+        * -> These functions call a function for you.Eg using map in a function that halves numbers in an array: 
+        * 
+        */
+        const numbers = [2,4,6,8,10]
+        //we can use map as follows:
+        const halfNumbers =  numbers.map(value => value / 2);
+        console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
+ 
+        //or we can use declarative way: 
+        const halfValues = value => value / 2;     //when you use parenthesis on a arrow functions you get errors.
+        const halfNumbers = numbers.map(halfValues);
+        console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
+        //here we are just passing a function to be executed, the map will call the callback for us.Map returns a new array
+ 
+        /**      ###The MAP METHOD###
+         * -> returns a value of a new array which is a result of callback function.
+         * -> it calls a provided callback function once on each array item in order & constructs a new array fromresults.
+         * -> Syntax is : map((element) => {code block}) || 
+         */
+ 
+ 
+        /**    ###The FILTER METHOD###
+         * -> when you are filtering out something, you are keeping what you want and gettin rid of what you dont want.
+         * -> a good practice is to filter out things.Eg to get even numbers filter out the odd numbers.
+         * 
+         */
+        const moreNumbers = [1,2,3,4,5,6,7,8,9,10]
+ 
+        const evenNumbers = moreNumbers.filter(number => number % 2 === 0);
+        console.log(evenNumbers); //OUTPUT [2,4,6,8,10]
+ 
