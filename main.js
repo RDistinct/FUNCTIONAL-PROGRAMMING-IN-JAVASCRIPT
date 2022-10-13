@@ -25,7 +25,8 @@
  *  -->Immutability (Safety)
  *  -->Pure vs Impure Functions ✔
  *  -->First Class Functions  (Transparent) ✔
- *  -->Higher Order Functions 
+ *  -->Higher Order Functions (Map, Filter, Reduce, forEach)✔
+ *  -->Functor
  *  -->Closure
  *  -->Recursion
  *  -->Currying
@@ -177,11 +178,7 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
       */
 
 
-/**                     ### HIGHER ORDER FUNCTION ###
- * -> Can take another function as a parameter or return another function(or both).
- * -> A function that receives or passes out another function
- * 
- * 
+/**                     
  *                      ### FIRST CLASS FUNCTION ###
  * -> Can be used as a variable/value and passed into another function or returned from another function.
  * -> In short, functions are treated like other variables.A function can be passed as an argument to another function, can be returned by another function, or can be assigned as a value to a variable. 
@@ -212,7 +209,7 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
        salutation(greet, "Joe"); //OUTPUT: Hello, joe
        /**
         * We pass greet function as an argument to salutation function.
-        * -> A function passed as an argument to another function is called a CallBack function 
+        * -> A function passed as an argument to another function is called a CallBack function. Eg greet function
         */ 
 
        //Return a function
@@ -226,44 +223,43 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
         * -> A function that returns another function or takes another function as a parameter is called a Higher Order Function
         */
 
-
        /**
         *                   ###HIGHER ORDER FUNCTIONS#### 
-        * -> Can take another function as a parameter or return another function(or both).     
+        * -> Can take another function(callback function) as a parameter or return another function(or both).     
         * -> Its a function that receives or passes out another function
         * -> Javascript has in built array methods that support functional programming natively.
         * -> These functions call a function for you.Eg using map in a function that halves numbers in an array: 
         * 
         */
-        const numbers = [2,4,6,8,10]
-        //we can use map as follows:
-        const halfNumbers =  numbers.map(value => value / 2);
-        console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
- 
-        //or we can use declarative way: 
-        const halfValues = value => value / 2;     //when you use parenthesis on a arrow functions you get errors.
-        const halfNumbers = numbers.map(halfValues);
-        console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
-        //here we are just passing a function to be executed, the map will call the callback for us.Map returns a new array
- 
-        /**      ###The MAP METHOD###
-         * -> returns a value of a new array which is a result of callback function.
-         * -> it calls a provided callback function once on each array item in order & constructs a new array fromresults.
-         * -> Syntax is : map((element) => {code block}) || 
-         */
- 
- 
-        /**    ###The FILTER METHOD###
-         * -> when you are filtering out something, you are keeping what you want and gettin rid of what you dont want.
-         * -> a good practice is to filter out things.Eg to get even numbers filter out the odd numbers.
-         * 
-         */
-        const moreNumbers = [1,2,3,4,5,6,7,8,9,10]
- 
-        const evenNumbers = moreNumbers.filter(number => number % 2 === 0);
-        console.log(evenNumbers); //OUTPUT [2,4,6,8,10]
+       const numbers = [2,4,6,8,10]
+       //we can use map as follows:
+       const halfNumbers =  numbers.map(value => value / 2);
+       console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
 
-        /**
+       //or we can use declarative way: 
+       const halfValues = value => value / 2;     //when you use parenthesis on a arrow functions you get errors.
+       const halfNumbers = numbers.map(halfValues);
+       console.log(halfNumbers); //OUTPUT: [1,2,3,4,5]
+       //here we are just passing a function to be executed, the map will call the callback for us.Map returns a new array
+
+       /**      ###The MAP METHOD###
+        * -> returns a value of a new array which is a result of callback function.
+        * -> it calls a provided callback function once on each array item in order & constructs a new array fromresults.
+        * -> Syntax is : map((element) => {code block}) || 
+        */
+
+
+       /**    ###The FILTER METHOD###
+        * -> when you are filtering out something, you are keeping what you want and gettin rid of what you dont want.
+        * -> a good practice is to filter out things.Eg to get even numbers filter out the odd numbers.
+        * 
+        */
+       const moreNumbers = [1,2,3,4,5,6,7,8,9,10]
+
+       const evenNumbers = moreNumbers.filter(number => number % 2 === 0);
+       console.log(evenNumbers); //OUTPUT [2,4,6,8,10]
+
+       /**
         *       ###THE REDUCE METHOD###
         * ->in functional programming it is the most used method because it reduces things to a single value.
         * -> takes a user-supplied callback function & executes it on each element of the array in an orderly manner,passing the return value from calculation on the preceeding element.
@@ -275,31 +271,31 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
         * -> Eg of reduce to add numbers in array
         */
 
-         const numbers = [2,3,4]
-         const addNumbers = numbers.reduce((sum, value) => sum + value);
-         
-         console.log(addNumbers); //OUTPUT: 9
- 
-         //To add one using ilnitial value
-         const numbers = [2,3,4]
-         const addNumbers = numbers.reduce((sum, value) => sum + value, 1);
-         console.log(addNumbers); //OUTPUT: 10
-         //The 1 is an initial value
-         /**
-          * -> initial value is a value to which previousValue is initialized when callback function is called for the first time.
-          * -> If initialValue is specified, also the currentValue is initialized to the first value in the array.
-          * -> If initialValue is not specified, previousValue is initialized to the first value of the array, & currentValue is initialized to the second value in the array.
-          * Eg of reduce function with callbacks:
-          */
- 
-         const add1 = number => number + 1;
-         const add2 = number => number + 2;
- 
-         const inputFunction = (input, fn) => fn(input) //takes an input and a function and returns the function with the input given
- 
-         const reduceValue = [add1, add2].reduce(inputFunction, 1); //OUTPUT 4
+        const numbers = [2,3,4]
+        const addNumbers = numbers.reduce((sum, value) => sum + value);
+        
+        console.log(addNumbers); //OUTPUT: 9
 
-         /**
+        //To add one using ilnitial value
+        const numbers = [2,3,4]
+        const addNumbers = numbers.reduce((sum, value) => sum + value, 1);
+        console.log(addNumbers); //OUTPUT: 10
+        //The 1 is an initial value
+        /**
+         * -> initial value is a value to which previousValue is initialized when callback function is called for the first time.
+         * -> If initialValue is specified, also the currentValue is initialized to the first value in the array.
+         * -> If initialValue is not specified, previousValue is initialized to the first value of the array, & currentValue is initialized to the second value in the array.
+         * Eg of reduce function with callbacks:
+         */
+
+        const add1 = number => number + 1;
+        const add2 = number => number + 2;
+
+        const inputFunction = (input, fn) => fn(input) //takes an input and a function and returns the function with the input given
+
+        const reduceValue = [add1, add2].reduce(inputFunction, 1); //OUTPUT 4
+
+        /**
          * ###THE FOREACH METHOD###
          * -> executes a callback function once for every array item in an ascending index order.
          * -> it returns undefined value.
@@ -322,4 +318,48 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
                     //"SWEDEN"
                    //"NORWAY"
         
- 
+
+/**
+ * ###FUNCTOR###
+ * -> in Math, a functor is a mapping between categories
+ * -> functor data type is anything we can iterate/map over.
+ * -> its a container whith an interface which can be used to apply a function to items inside it.
+ * -> functor types are usually represented as an object with a .map() method that maps inputs & outputs while preserving structure. 
+ * -> a good example is an array, object, streams, trees. 
+ * -> in short a functor is a function object.
+ * -> JS built in array & promise objects act like functors. Eg array.map, array.filter.
+ * ->forEach is not a functor though it is similar.
+ * Eg of functor demo
+ */
+
+function add2(value){
+  return value + 2;
+}
+
+console.log([2,3].map(add2)); //OUTPUT [4,5]
+/**
+ * ->functors can also take a value(can be an array(map) or string(string functor)) & a function and passes the individual items each into the function.It creates a new structure with the processed values returned 
+ */
+  //Eg of functor that adds one or minus one on numbers or string
+
+  function stringFunctor(value, fn) { //TAKES VALUE &FUNCTION AS PARAMS
+    let chars = value.split("");      //SPLIT VALUE 
+    return chars
+      .map(function (char) {
+        return String.fromCharCode(fn(char.charCodeAt(0))); //convert char to number & pass it to fn. we take return value of fn which is a number &convert to character.
+      })
+      .join(""); //joins them together.
+  }
+
+  function plus1(value){
+    return value + 1;
+  }
+
+  
+  function minus1(value){
+    return value - 1;
+  }
+
+  [3,4].map(plus1) // OUTPUT: [4,5]
+  stringFunctor("ABC", plus1) //OUTPUT: "BCD"
+  stringFunctor("XYZ", minus1) //OUTPUT: "RXY"
