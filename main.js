@@ -298,4 +298,28 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
          const inputFunction = (input, fn) => fn(input) //takes an input and a function and returns the function with the input given
  
          const reduceValue = [add1, add2].reduce(inputFunction, 1); //OUTPUT 4
+
+         /**
+         * ###THE FOREACH METHOD###
+         * -> executes a callback function once for every array item in an ascending index order.
+         * -> it returns undefined value.
+         * -> Its syntax is:
+         * function callback (){]
+         *  array.forEach(callback)
+         * 
+         *  forEach((element) => {code})
+         *  forEach((callbackFn) => {code})
+         * -> callback fn is called once for each array element & unlike map() or reduce() it always returns undefilned & is not chainable.
+         * -> forEach does not mutate the array on which is called on but the callback function might do so.
+         * -> Eg 
+         */
+        const letters = ['a','b','c'];
+        letters.forEach(element => console.log(element));//OUTPUT 'a' 'b' 'c'
+
+        const countries = ['Finland', 'Estonia', 'Sweden', 'Norway']
+        countries.forEach(country => console.log(country.toUpperCase())); //OUTPUT "FINLAND"
+                     //"ESTONIA"
+                    //"SWEDEN"
+                   //"NORWAY"
+        
  
