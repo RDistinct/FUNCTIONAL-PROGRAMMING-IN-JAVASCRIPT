@@ -327,8 +327,8 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
  * -> functor types are usually represented as an object with a .map() method that maps inputs & outputs while preserving structure. 
  * -> a good example is an array, object, streams, trees. 
  * -> in short a functor is a function object.
- * -> JS built in array & promise objects act like functors. Eg array.map, array.filter.
- * ->forEach is not a functor though it is similar.
+ * -> JS built in array & promise objects act like functors.
+ * ->forEach is not a functor because it does not return anything in a structured form, though it is similar.
  * Eg of functor demo
  */
 
@@ -338,9 +338,8 @@ function add2(value){
 
 console.log([2,3].map(add2)); //OUTPUT [4,5]
 /**
- * ->functors can also take a value(can be an array(map) or string(string functor)) & a function and passes the individual items each into the function.It creates a new structure with the processed values returned 
  */
-  //Eg of functor that adds one or minus one on numbers or string
+  //Eg of function that adds one or minus one on numbers or string
 
   function stringFunctor(value, fn) { //TAKES VALUE &FUNCTION AS PARAMS
     let chars = value.split("");      //SPLIT VALUE 
@@ -363,3 +362,5 @@ console.log([2,3].map(add2)); //OUTPUT [4,5]
   [3,4].map(plus1) // OUTPUT: [4,5]
   stringFunctor("ABC", plus1) //OUTPUT: "BCD"
   stringFunctor("XYZ", minus1) //OUTPUT: "RXY"
+
+ 
