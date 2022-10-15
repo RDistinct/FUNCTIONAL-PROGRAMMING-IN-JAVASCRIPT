@@ -26,10 +26,10 @@
  *  -->Pure vs Impure Functions ✔
  *  -->First Class Functions  (Transparent) ✔
  *  -->Higher Order Functions (Map, Filter, Reduce, forEach)✔
- *  -->Functor
- *  -->Closure
- *  -->Recursion
- *  -->Currying
+ *  -->Functors ✔
+ *  -->Closure 
+ *  -->Recursion 
+ *  -->Currying 
  *  -->Composition 
  * 
  */
@@ -150,6 +150,7 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
      *  b)Side effect free- function cannot cause side effect. 
      * =>SIDE EFFECTS: are when your code interacts(reads/writes to) with external mutable state eg I/O, reassigning a variable, modifying a mutable object.
      * ->External Mutable state is anything outside the function that would change the data in your program eg set a function,boolean or an object, delete properties on object.
+     * -> Immutable means cannot be modified after being created.
      * Eg of mutability state being set inside function: 
      */
         function changeAvailability(){
@@ -324,11 +325,11 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
  * -> in Math, a functor is a mapping between categories
  * -> functor data type is anything we can iterate/map over.
  * -> its a container whith an interface which can be used to apply a function to items inside it.
- * -> functor types are usually represented as an object with a .map() method that maps inputs & outputs while preserving structure. 
+ * -> functor types are usually represented as an object with a .map() method that maps inputs & outputs while preserving structure.For this reason map() method can be chained.
  * -> a good example is an array, object, streams, trees. 
  * -> in short a functor is a function object.
  * -> JS built in array & promise objects act like functors.
- * ->forEach is not a functor because it does not return anything in a structured form, though it is similar.
+ * ->if you map an identity function over a functor,the resulting functor must be equivalent to the original functor.The filter,reduce &forEach functions are not used to map as they return a different result from the original functor.
  * Eg of functor demo
  */
 
@@ -337,9 +338,8 @@ function add2(value){
 }
 
 console.log([2,3].map(add2)); //OUTPUT [4,5]
-/**
- */
-  //Eg of function that adds one or minus one on numbers or string
+
+  //THIS EXAMPLE IS WRONG ABOUT FUNCTORS. A function that adds one or minus one on numbers or string
 
   function stringFunctor(value, fn) { //TAKES VALUE &FUNCTION AS PARAMS
     let chars = value.split("");      //SPLIT VALUE 
@@ -362,5 +362,68 @@ console.log([2,3].map(add2)); //OUTPUT [4,5]
   [3,4].map(plus1) // OUTPUT: [4,5]
   stringFunctor("ABC", plus1) //OUTPUT: "BCD"
   stringFunctor("XYZ", minus1) //OUTPUT: "RXY"
+  //this example is wrong coz the input structure of value was altered by splitting it
 
+  /**
+   * -> in short these are objects that implement map() method.
+   * 
+   * ->there is a difference between functors in functional programming & functors in mathematics.
+   * When we talk about functors in functional programming (especially Haskell), a functor refers to that concept in category theory. Under that definition, Array#filter is not a functor.
+
+But if we take a functor to simply mean a higher-order function, in this case, Array#forEach is a functor.
+   */
  
+
+/**### CLOSURES ### 
+ * -> A Closure is a function enclosing a reference variable to its outer scope.
+ * ->A Closure is the combination of a function enclosed with references to its surrounding state/lexical environment.
+ * -> A closure gives you access to an outer function's scope from an inner function.
+ * -> closures are created in JS every time a function is created at function creation time.
+ * -> A closure is the combination of a function and the lexical environment within which that function was declared.
+ * ->when you return a function from a function you create a closure.
+ * -> closure is a way to make predictable state by enclosing behaviour
+ * -> In a closure, the outer function returns the inner function.
+ * -> Eg
+*/
+
+
+
+/** Calling outer function when invoking inner function without return keyword */
+function outer (){
+  let value = 0;
+  function inner(){
+    value ++;
+    console.log(value)
+  }
+  inner()             //Notice here we are not returnng the inner function but instead invoking it.
+}
+
+outer();// 1 - the js engine checks if variable value is present in inner function & if its not it checks the outer function & finds the variable present , increments the value by 1 & logs it to the console.
+outer(); //1 - when outer function is called even twice, the output is the same because with every new invokation a temporary memory is established so value is reinitialised to 0. 
+
+
+function outer (){
+  let value = 0;
+  function inner(){
+    value ++;
+    console.log(value)
+  }
+  return inner        //by returning the inner function we can invoke it at a later time.Then we can store it in a variable & call it via  the variable.Eg const fn = outer(); fn();  If we want to call the inner function immediately, we can write inner() without return keyword instead..
+}
+const fn = outer();  //the result of invoking the outer function is stored in a variable named fn. This result is the inner function.We are not executing the inner function from wthin the outer instead we are just returning it.To invoke the inner function, we call fn()
+fn()
+fn()
+/**
+ * ->the output will be 1 & 2.this is because when we return the inner function,we return it together with its scope.Function inner is bundled up with variable counter & that is a closure.In this situation the function persists/remember the value of the counter variable
+ * -> when we call the fn function for the first time, counter id incremented to one & value ils logged to the terminal & fn remembers counter value is one.
+ * ->Next time fn is called it increments value by one.
+ * ->In closures the inner function has access to variables  in outer function scope even after outer function has finished execution.
+ * 
+ * SUMMARY OF CLOSURES
+ * -> The outer function returns the inner function 
+ * -> Inner function is executed in a different scope
+ * -> Inner function continues to maintain access to the outer functions variables even though the outer function no longer exists. 
+ * 
+ * 
+ *  
+ */
