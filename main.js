@@ -25,12 +25,12 @@
  *  -->Immutability (Safety)
  *  -->Pure vs Impure Functions ✔
  *  -->First Class Functions  (Transparent) ✔
- *  -->Higher Order Functions (Map, Filter, Reduce, forEach)✔
+ *  -->Higher Order Functions (Map, Filter, Reduce, forEach, Some, Every, Find, Includes)✔
  *  -->Functors ✔
- *  -->Closure 
- *  -->Recursion 
+ *  -->Closure ✔
  *  -->Currying 
  *  -->Composition 
+ *  -->Recursion 
  * 
  */
 
@@ -385,7 +385,14 @@ But if we take a functor to simply mean a higher-order function, in this case, A
  * -> In a closure, the outer function returns the inner function.
  * -> Eg
 */
-
+function outerFunction (){
+  let outerFnValue = "out";
+  function innerFunction(){
+    console.log(`The value is : ${outerFnValue} `)
+  }
+  return innerFunction();
+}
+outerFunction(); //OUTPUT The value is out
 
 
 /** Calling outer function when invoking inner function without return keyword */
@@ -425,5 +432,96 @@ fn()
  * -> Inner function continues to maintain access to the outer functions variables even though the outer function no longer exists. 
  * 
  * 
- *  
+ *  Another Example
  */
+ const greet = function(salutation) {
+  return function(firstName) {
+    return `${salutation} ${firstName}`
+  }
+}
+
+ const howdy = greet("HOWDY"); //Assign salutation & Invoke the inner function & store it in howdy
+ const hello = greet("Hello")
+
+console.log(howdy("Joe")); //HOWDY Joe - assign Joe to inner function
+console.log(hello("Joe")); //Hello Joe
+
+
+/**
+ *          ###CURRYING####
+ * -> Is the transformation of a function eith multiple arguments to multiple functions with containing a single argument in a sequence
+ * -> its wrapping a function inside a function. Parent function takes the first argument that returns the function taking the next argument.
+ * -> Its syntax is 
+ *    function fun(param1 param2 param3 param4)
+ *    
+ *  currying function
+ *    function fun(param1){
+ *      return function (param2){
+ *        return function (param3){
+ *          return function (param4){
+ *          }
+ *        }
+ *      }
+ *    }
+ *  
+ * Eg 
+ */
+//a function that performs currying for two arguments f(y,z) which translates to f(y)(z)
+function curry(f){        //add is passed to f
+  return function(y){     //
+    return function (z){
+      return f(y,z);
+    }
+  }
+}
+
+// Its usage 
+function add(y,z){
+  return y + z;
+}
+const currySum = curry(add)
+console.log(currySum(1)(2)) //OUTPUT: 
+
+//area = pi* r2
+const getArea(pi, radius){
+  return pi * (radius * radius);
+}
+getArea(3.142, 20)
+
+//currying
+const getArea(pi){
+  return function(radius){
+    return pi * (radius * radius);
+  }
+}
+
+
+//without currying
+function getVolume(length,width,height){
+  return length * width * height;
+}
+
+console.log (getVolume(5,10,15)); //OUTPUT 750
+
+//currying function to getVolume
+function getVolume(length){
+  return function(breadth){
+    return function (height){
+      return length * breadth * height;
+    }
+  }
+}
+
+console.log(getVolume(5)(10)(15)); //OUTPUT 750
+
+/**
+ * SUMMARY 
+ * -> is a transform that makes f(a,b,c) callable as f(a)(b)(c)
+ * 
+ */
+
+
+  //###React###
+function myButton(){
+  return (<div>Button</div>)  //JSX
+}
