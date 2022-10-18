@@ -28,7 +28,7 @@
  *  -->Higher Order Functions (Map, Filter, Reduce, forEach, Some, Every, Find, Includes)✔
  *  -->Functors ✔
  *  -->Closure ✔
- *  -->Currying 
+ *  -->Currying ✔
  *  -->Composition 
  *  -->Recursion 
  * 
@@ -319,6 +319,74 @@ console.log(double(arrNum));    //OUTPUT: [2,10,16,6,8,4,18,22,50,60]
                     //"SWEDEN"
                    //"NORWAY"
         
+/**
+ *        ###THE SOME METHOD###
+ * ->tests whether at least one arrray element passes the implementation of the provided function.
+ * ->Returns true if it finds an element that when passed in the provided function returns true,else it returns false.
+ * ->It does not modify the array. It executes the callback function once for each element. 
+ * -> If it returns a truthy value, it stops iterating over the rest of the elements.Otherwise it keeps iterating and returns false if no truthy value is found
+ * ->its syntax is 
+ *    some((element)=>{code});
+ *    
+ *    some(function (element){code})
+ * Eg
+ *  
+ */
+
+const arr = [1,2,3,4,5,6,7,8,9,10];
+
+const devisibleBy2 = elem => elem % 2 === 0;
+console.log(arr.some(devisibleBy2)); //true
+
+
+
+/**     ###THE EVERY METHOD###
+ * ->tests whether all elements in the array pass the test implemented byhte provided function 
+ * -> It executes the callback function once on every item until the callback function returns a falsy value where it immediately returns false.
+ * -> If all elements return a truthy value then the every returns true.
+ * Its syntax is arr.every(element => {code})
+ *    OR every(function(element){code})
+ * 
+ * every is the oposite of some
+ */
+const below20 = value => value <= 20; 
+const arr = [5,10,15,20,52,25,30]
+console.log(arr.every(below20)); //OUTPUT: false coz not all elements are below 20 
+
+const below20 = value => value <= 20; 
+const arr = [5,10,15,20] 
+console.log(arr.every(below20));// OUTPUT:TRUE coz all elements pass the test. 
+
+/**###THE FIND METHOD###
+ *->Returns the first element in the provided array that satisfies the provided callback function.
+ -> returns undefined if no value satisfies the testing function 
+ -> its syntax is find(element => {code})
+            find(function(element) {code})
+ */
+
+  const arr = [5,10,15,20] 
+  const below10 = arr.find(value => value < 10);
+  console.log(below10); //OUTPUT is 5
+
+
+/**
+ * ###THE METHOD INCLUDES###
+ * -> itdetermines if an array includes a certain value among its elements, if the value is included it returns true if not false.
+ * ->Its syntax is  includes(earchElement)
+ * 
+ */
+const arr = [5,10,15]
+console.log(arr.includes(5)); //OUTPUT is 5
+
+          /**
+           * -----SUMMARY NOTE------- 
+           * 
+           * If you need the index of the found element in the array use findIndex().
+            If you need to find the index of a value, use indexOf(). (It's similar to findIndex(), but checks each element for equality with the value instead of using a testing function.)
+            If you need to find if a value exists in an array, use includes(). Again, it checks each element for equality with the value instead of using a testing function.
+            If you need to find if any element satisfies the provided testing function, use some().
+           */
+
 
 /**
  * ###FUNCTOR###
